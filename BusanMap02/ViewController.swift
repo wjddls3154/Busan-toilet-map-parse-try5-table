@@ -120,6 +120,7 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate, CL
             annotations.append(annotation!)
         }
         
+        
       
         myMapView.addAnnotations(annotations)
 
