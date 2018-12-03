@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import AddressBook
 
 class BusanData: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
@@ -26,5 +27,16 @@ class BusanData: NSObject, MKAnnotation {
         self.openTime = openTime
         self.type = type
         
+    }
+    
+    func mapItem() -> MKMapItem
+    {
+        let addressDictionary = [String(kABPersonAddressStreetKey) : subtitle]
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDictionary)
+        let mapItem = MKMapItem(placemark: placemark)
+        
+        mapItem.name = "\(title!) \(subtitle!)"
+        
+        return mapItem
     }
 }

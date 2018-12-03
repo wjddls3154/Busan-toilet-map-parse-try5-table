@@ -142,7 +142,8 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate, CL
             let tOpenTime = item["openTime"]
             let toiletName = item["toiletName"]
             let insname = item["instName"]
-            annotation = BusanData(coordinate: CLLocationCoordinate2D(latitude: dLat!, longitude: dLong!), title: insname!, subtitle: toiletName!, openTime: tOpenTime!, type: insname!, toiletName: tn!)
+            let types = item["type"]
+            annotation = BusanData(coordinate: CLLocationCoordinate2D(latitude: dLat!, longitude: dLong!), title: insname!, subtitle: toiletName!, openTime: tOpenTime!, type: types!, toiletName: tn!)
 
             annotations.append(annotation!)
         }
@@ -237,13 +238,20 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate, CL
             annotationView?.annotation = annotation
         }
 
-        let btn = UIButton(type: .detailDisclosure)
-        annotationView?.rightCalloutAccessoryView = btn
+        let btnR = UIButton(type: .detailDisclosure)
+        annotationView?.rightCalloutAccessoryView = btnR
+        let btnL = UIButton(type: .detailDisclosure)
+        annotationView?.leftCalloutAccessoryView = btnL
         return annotationView
     }
     
     // rightCalloutAccessoryView를 눌렀을때 호출되는 delegate method
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.rightCalloutAccessoryView {
+            
+        
+        
         let viewAnno = view.annotation as! BusanData // 데이터 클래스로 형변환(Down Cast)
         let vAtation = viewAnno.title
         let vStation = viewAnno.subtitle
@@ -251,18 +259,28 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate, CL
         
        
         
-       let tOpenTime = item["openTime"]
-        let tType = item["type"]
+       
+        //let tType = item["type"]
+        let vtype = viewAnno.type
+        let vopen = viewAnno.openTime
+        
         let ac = UIAlertController(title: vStation! + " 제공", message: nil, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "담당기관 : " + vAtation!, style: .default, handler: nil))
         //관리기관
         ac.addAction(UIAlertAction(title: "현재시간 : " + currentTime! , style: .default, handler: nil))
-        ac.addAction(UIAlertAction(title: "오픈시간 : " + tOpenTime! , style: .default, handler: nil))
+        ac.addAction(UIAlertAction(title: "오픈시간 : " + vopen! , style: .default, handler: nil))
        
-        ac.addAction(UIAlertAction(title: "구분 : " + tType!, style: .default, handler: nil))
+        ac.addAction(UIAlertAction(title: "구분 : " + vtype!, style: .default, handler: nil))
+        print(vtype)
         //개방시간
         ac.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
         self.present(ac, animated: true, completion: nil)
+        }
+                else if control == view.leftCalloutAccessoryView {
+                    let location = view.annotation as! BusanData
+                    let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+                    location.mapItem().openInMaps(launchOptions: launchOptions)
+                }
         
     }
     
