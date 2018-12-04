@@ -17,7 +17,7 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate, CL
     var locationManager = CLLocationManager()
     var annotation: BusanData?
     var annotations: Array = [BusanData]()
-    
+    var selected: BusanData?
     var item:[String:String] = [:]  // item[key] => value
     var items:[[String:String]] = []
     var currentElement = ""
@@ -240,47 +240,26 @@ class ViewController: UIViewController, MKMapViewDelegate, XMLParserDelegate, CL
 
         let btnR = UIButton(type: .detailDisclosure)
         annotationView?.rightCalloutAccessoryView = btnR
-        let btnL = UIButton(type: .detailDisclosure)
-        annotationView?.leftCalloutAccessoryView = btnL
+        
         return annotationView
     }
     
     // rightCalloutAccessoryView를 눌렀을때 호출되는 delegate method
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        selected = view.annotation as? BusanData
         
         if control == view.rightCalloutAccessoryView {
-            
-        
-        
-        let viewAnno = view.annotation as! BusanData // 데이터 클래스로 형변환(Down Cast)
-        let vAtation = viewAnno.title
-        let vStation = viewAnno.subtitle
-        //let vPM10Cai = viewAnno.toiletName
-        
-       
-        
-       
-        //let tType = item["type"]
-        let vtype = viewAnno.type
-        let vopen = viewAnno.openTime
-        
-        let ac = UIAlertController(title: vStation! + " 제공", message: nil, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "담당기관 : " + vAtation!, style: .default, handler: nil))
-        //관리기관
-        ac.addAction(UIAlertAction(title: "현재시간 : " + currentTime! , style: .default, handler: nil))
-        ac.addAction(UIAlertAction(title: "오픈시간 : " + vopen! , style: .default, handler: nil))
-       
-        ac.addAction(UIAlertAction(title: "구분 : " + vtype!, style: .default, handler: nil))
-        print(vtype)
-        //개방시간
-        ac.addAction(UIAlertAction(title: "닫기", style: .cancel, handler: nil))
-        self.present(ac, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "showDetail", sender: self)
         }
-                else if control == view.leftCalloutAccessoryView {
-                    let location = view.annotation as! BusanData
-                    let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-                    location.mapItem().openInMaps(launchOptions: launchOptions)
-                }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            let detailVC = segue.destination as! DetailViewController
+            
+            detailVC.selectedForDetail = self.selected
+        }
         
     }
     
