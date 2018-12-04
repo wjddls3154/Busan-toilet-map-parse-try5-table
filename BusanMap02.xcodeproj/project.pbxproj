@@ -14,6 +14,7 @@
 		0571780321881837006975C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0571780121881837006975C3 /* LaunchScreen.storyboard */; };
 		0571780C2188195E006975C3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0571780B2188195E006975C3 /* MapKit.framework */; };
 		0571780E218821B1006975C3 /* BusanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0571780D218821B1006975C3 /* BusanData.swift */; };
+		14329BDC21B64D6300103AC5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14329BDB21B64D6300103AC5 /* DetailViewController.swift */; };
 		145F121321ABD96000402526 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057177FA21881836006975C3 /* ViewController.swift */; };
 		1477564C21B4FF7200221355 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1477564B21B4FF7200221355 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -29,6 +30,7 @@
 		0571780421881837006975C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0571780B2188195E006975C3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0571780D218821B1006975C3 /* BusanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusanData.swift; sourceTree = "<group>"; };
+		14329BDB21B64D6300103AC5 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1477564B21B4FF7200221355 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 			children = (
 				057177F821881836006975C3 /* AppDelegate.swift */,
 				057177FA21881836006975C3 /* ViewController.swift */,
+				14329BDB21B64D6300103AC5 /* DetailViewController.swift */,
 				057177FC21881836006975C3 /* Main.storyboard */,
 				1477564B21B4FF7200221355 /* LaunchScreen.storyboard */,
 				057177FF21881837006975C3 /* Assets.xcassets */,
@@ -161,6 +164,7 @@
 				145F121321ABD96000402526 /* ViewController.swift in Sources */,
 				0571780E218821B1006975C3 /* BusanData.swift in Sources */,
 				057177F921881836006975C3 /* AppDelegate.swift in Sources */,
+				14329BDC21B64D6300103AC5 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
